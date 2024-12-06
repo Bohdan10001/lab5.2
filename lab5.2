@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cmath> 
+
+
+double taylor_ln(double x, int terms) {
+    if (x <= 0) {
+        std::cerr << "Помилка: ln(x) визначений тільки для x > 0." << std::endl;
+        return NAN;
+    }
+
+    double sum = 0.0; 
+    double term;      
+
+    for (int n = 0; n < terms; ++n) {
+        term = std::pow(-1, n) * std::pow(x - 1, n + 1) / (n + 1);
+        sum += term;
+    }
+
+    return sum;
+}
+
+int main() {
+    double x;
+    int terms;
+
+   
+    std::cout << "x = ";
+    std::cin >> x;
+
+    std::cout << "terms = ";
+    std::cin >> terms;
+
+   
+    double result = taylor_ln(x, terms);
+
+    
+    if (!std::isnan(result)) {
+        std::cout << "ln(" << x << ") ≈ " << result << terms << std::endl;
+    }
+
+    return 0;
+}
